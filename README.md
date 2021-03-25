@@ -1,6 +1,6 @@
 # EmknBot
 
 ## Members
-- @IdeaSeeker   → Nikita Stroganov
+- [@IdeaSeeker](https://github.com/IdeaSeeker)   → Nikita Stroganov
 - @Gor1x        → Egor Postnikov
 - @SBOne-Kenobi → Rustam Sadykov

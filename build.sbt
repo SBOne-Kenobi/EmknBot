@@ -15,3 +15,8 @@ lazy val root = project.in(file("."))
         test in assembly := {},
         mainClass in assembly := Some("ru.codegen.emknbot.Main")
     )
+    .settings(
+        semanticdbEnabled := true,
+        semanticdbVersion := scalafixSemanticdb.revision,
+        scalacOptions += "-Ywarn-unused"
+    )

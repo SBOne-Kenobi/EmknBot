@@ -6,17 +6,20 @@ lazy val root = project.in(file("."))
         name := "EmknBot",
         Compile / run / mainClass := Some("ru.codegen.emknbot.Main")
     )
-    .settings(
+    .settings( // dependencies
         libraryDependencies += "org.augustjune" %% "canoe" % "0.5.1",
         libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.5" % "test"
     )
-    .settings(
+    .settings( // sbt-assembly
         assembly / assemblyJarName  := "EmknBot.jar",
         assembly / test := {},
         assembly / mainClass := Some("ru.codegen.emknbot.Main")
     )
-    .settings(
+    .settings( // scalafix
         semanticdbEnabled := true,
         semanticdbVersion := scalafixSemanticdb.revision,
         scalacOptions += "-Ywarn-unused"
+    )
+    .settings( // sbt-updates
+        dependencyUpdatesFailBuild := true
     )

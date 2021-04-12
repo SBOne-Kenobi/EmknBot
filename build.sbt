@@ -8,10 +8,11 @@ lazy val root = project.in(file("."))
     )
     .settings( // dependencies
         libraryDependencies += "org.augustjune" %% "canoe" % "0.5.1",
+        libraryDependencies += "org.mnode.ical4j" % "ical4j" % "3.0.25",
         libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.7" % "test"
     )
     .settings( // sbt-assembly
-        assembly / assemblyJarName  := "EmknBot.jar",
+        assembly / assemblyJarName := "EmknBot.jar",
         assembly / test := {},
         assembly / mainClass := Some("ru.codegen.emknbot.Main")
     )

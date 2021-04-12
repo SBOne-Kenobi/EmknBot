@@ -7,16 +7,16 @@ trait Subscriber {
     def update(event: EmknEvent): Unit
 }
 
-class EventNotifier() {
+class c() {
 
     private val subscribers: mutable.Set[(Subscriber, EventType)] =
         mutable.Set.empty
 
     def subscribe(subscriber: Subscriber, eventType: EventType): Unit =
-        subscribers += (subscriber, eventType)
+        subscribers.add(subscriber, eventType)
 
     def unsubscribe(subscriber: Subscriber, eventType: EventType): Unit =
-        subscribers -= (subscriber, eventType)
+        subscribers.remove(subscriber, eventType)
 
     def notifySubscribers(event: EmknEvent): Unit =
         subscribers.collect {

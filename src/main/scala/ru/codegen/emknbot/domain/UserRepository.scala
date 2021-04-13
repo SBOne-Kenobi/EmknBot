@@ -6,7 +6,7 @@ trait UserRepository[F[_]] {
 
     def save(user: EmknUser): F[Unit]
 
-    def getAll: F[List[EmknUser]]
+    def get(): F[List[EmknUser]]
 
     def findById(id: Id): F[Either[Throwable, EmknUser]]
 }

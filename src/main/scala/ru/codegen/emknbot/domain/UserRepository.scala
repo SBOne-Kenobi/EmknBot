@@ -1,10 +1,12 @@
 package ru.codegen.emknbot.domain
 
-trait UserRepository[T[User]] {
+import ru.codegen.emknbot.domain.userinfo._
 
-    def save(user: EmknUser): Unit
+trait UserRepository[F[_]] {
 
-    def getAll: T[EmknUser]
+    def save(user: EmknUser): F[Unit]
 
-    def findById[User](id: Int): User
+    def getAll: F[List[EmknUser]]
+
+    def findById(id: Id): F[Either[Throwable, EmknUser]]
 }

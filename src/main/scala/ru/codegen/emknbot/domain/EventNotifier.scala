@@ -7,7 +7,7 @@ trait Subscriber {
     def update(event: EmknEvent): Unit
 }
 
-class c() {
+class EventNotifier() {
 
     private val subscribers: mutable.Set[(Subscriber, EventType)] =
         mutable.Set.empty

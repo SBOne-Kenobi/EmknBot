@@ -1,3 +1,5 @@
 package ru.codegen.emknbot.domain
 
-case class EmknUser(login: String, password: String, id: Int) // FIXME: only id: Int?
+import ru.codegen.emknbot.domain.userinfo._
+
+case class EmknUser(login: Login, password: Password, id: Id)

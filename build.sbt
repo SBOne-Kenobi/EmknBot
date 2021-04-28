@@ -1,5 +1,5 @@
-version in Global := "0.1"
-scalaVersion in Global := "2.13.5"
+Global / version := "0.1"
+Global / scalaVersion := "2.13.5"
 
 lazy val root = project.in(file("."))
     .settings(
@@ -8,12 +8,13 @@ lazy val root = project.in(file("."))
     )
     .settings( // dependencies
         libraryDependencies += "org.augustjune" %% "canoe" % "0.5.1",
+        libraryDependencies += "org.mnode.ical4j" % "ical4j" % "3.0.25",
         libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.7" % "test"
     )
     .settings( // sbt-assembly
-        assembly / assemblyJarName  := "EmknBot.jar",
-        assembly / test := {},
-        assembly / mainClass := Some("ru.codegen.emknbot.Main")
+        assembly / assemblyJarName := "EmknBot.jar",
+        assembly / mainClass := Some("ru.codegen.emknbot.Main"),
+        assembly / test := {}
     )
     .settings( // scalafix
         semanticdbEnabled := true,

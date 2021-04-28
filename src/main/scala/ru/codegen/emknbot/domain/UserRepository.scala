@@ -10,5 +10,5 @@ trait UserRepository[F[_]] {
 
     def getAll: F[List[EmknUser]]
 
-    def findById(id: Id): F[Either[Throwable, EmknUser]]
+    def getById(id: Id): F[Either[Throwable, EmknUser]]
 }

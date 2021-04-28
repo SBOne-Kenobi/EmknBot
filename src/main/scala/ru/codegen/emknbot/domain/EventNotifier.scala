@@ -13,14 +13,15 @@ class EventNotifier() {
         mutable.Set.empty
 
     def subscribe(subscriber: Subscriber, eventType: EventType): Unit =
-        subscribers.add(subscriber, eventType)
+        subscribers.add((subscriber, eventType))
 
     def unsubscribe(subscriber: Subscriber, eventType: EventType): Unit =
-        subscribers.remove(subscriber, eventType)
+        subscribers.remove((subscriber, eventType))
 
     def notifySubscribers(event: EmknEvent): Unit =
         subscribers.collect {
-            case (subscriber, event.eventType) => subscriber
+            case (subscriber, t) if t == event.eventType =>
+                subscriber
         }.foreach { subscriber =>
             subscriber.update(event)
         }

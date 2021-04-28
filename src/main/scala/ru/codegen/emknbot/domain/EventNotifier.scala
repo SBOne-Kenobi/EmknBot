@@ -3,7 +3,6 @@ package ru.codegen.emknbot.domain
 import scala.collection.mutable
 
 trait Subscriber {
-
     def update(event: EmknEvent): Unit
 }
 

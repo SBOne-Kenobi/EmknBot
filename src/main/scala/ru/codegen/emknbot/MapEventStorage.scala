@@ -10,7 +10,6 @@ import scala.jdk.CollectionConverters.ConcurrentMapHasAsScala
 class MapEventStorage[F[_]: Applicative] extends EventStorage[F] {
 
     private val F = Applicative[F]
-    private implicit def pure[A]: A => F[A] = F.pure
 
     private val data = new ConcurrentHashMap[Id, List[EmknEvent]].asScala
 
@@ -19,17 +18,17 @@ class MapEventStorage[F[_]: Applicative] extends EventStorage[F] {
             case None => Some(List(event))
             case Some(list) => Some(event :: list)
         }
-        pure(Unit)
+        F.pure(Unit)
     }
 
     override def remove(userId: Id, event: EmknEvent): F[Unit] = {
         data.updateWith(userId)(
             _.map(_.filter(_ != event))
         )
-        pure(Unit)
+        F.pure(Unit)
     }
 
     override def getByUserId(id: Id): F[List[EmknEvent]] = {
-        data.getOrElse(id, List.empty)
+        F.pure(data.getOrElse(id, List.empty))
     }
 }

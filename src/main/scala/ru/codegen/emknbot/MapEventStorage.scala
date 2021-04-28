@@ -18,14 +18,14 @@ class MapEventStorage[F[_]: Applicative] extends EventStorage[F] {
             case None => Some(List(event))
             case Some(list) => Some(event :: list)
         }
-        F.pure(Unit)
+        F.pure()
     }
 
     override def remove(userId: Id, event: EmknEvent): F[Unit] = {
         data.updateWith(userId)(
             _.map(_.filter(_ != event))
         )
-        F.pure(Unit)
+        F.pure()
     }
 
     override def getByUserId(id: Id): F[List[EmknEvent]] = {

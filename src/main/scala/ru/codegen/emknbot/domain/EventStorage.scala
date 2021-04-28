@@ -8,5 +8,7 @@ trait EventStorage[F[_]] {
 
     def remove(userId: Id, event: EmknEvent): F[Unit]
 
-    def getByUserId(id: Id): F[List[EmknEvent]]
+    def getAll: F[List[(Id, List[EmknEvent])]]
+
+    def getById(id: Id): F[List[EmknEvent]]
 }

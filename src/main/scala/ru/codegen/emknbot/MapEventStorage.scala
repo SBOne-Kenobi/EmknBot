@@ -28,7 +28,11 @@ class MapEventStorage[F[_]: Applicative] extends EventStorage[F] {
         F.pure()
     }
 
-    override def getByUserId(id: Id): F[List[EmknEvent]] = {
+    override def getAll: F[List[(Id, List[EmknEvent])]] = {
+        F.pure(data.toList)
+    }
+
+    override def getById(id: Id): F[List[EmknEvent]] = {
         F.pure(data.getOrElse(id, List.empty))
     }
 }

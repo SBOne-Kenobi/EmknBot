@@ -1,10 +1,10 @@
 package ru.codegen.emknbot
 
 import ru.codegen.emknbot.domain.userinfo._
-import ru.codegen.emknbot.domain.{EmknUser, UserRepository}
-import cats.Applicative
 import ru.codegen.emknbot.MapUserRepository._
+import ru.codegen.emknbot.domain.{EmknUser, UserRepository}
 
+import cats.Applicative
 import java.util.concurrent.ConcurrentHashMap
 import scala.jdk.CollectionConverters.ConcurrentMapHasAsScala
 
@@ -20,16 +20,21 @@ class MapUserRepository[F[_] : Applicative] extends UserRepository[F] {
 
     private val data = new ConcurrentHashMap[Id, EmknUser].asScala
 
-    override def save(user: EmknUser): F[Unit] = {
+    override def add(user: EmknUser): F[Unit] = {
         data.update(user.id, user)
         F.pure()
     }
 
-    override def get(): F[List[EmknUser]] = {
+    override def remove(userId: Id): F[Unit] = {
+        data.remove(userId)
+        F.pure()
+    }
+
+    override def getAll: F[List[EmknUser]] = {
         F.pure(data.values.toList)
     }
 
-    override def findById(id: Id): F[Either[Throwable, EmknUser]] = {
+    override def getById(id: Id): F[Either[Throwable, EmknUser]] = {
         F.pure (data.get(id) match {
             case Some(x) => Right(x)
             case None => Left(UserNotFound())

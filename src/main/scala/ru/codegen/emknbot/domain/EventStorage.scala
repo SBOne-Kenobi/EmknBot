@@ -4,9 +4,11 @@ import ru.codegen.emknbot.domain.userinfo._
 
 trait EventStorage[F[_]] {
 
-    def add(event: EmknEvent): F[Unit]
+    def add(userId: Id, event: EmknEvent): F[Unit]
 
-    def remove(event: EmknEvent): F[Unit]
+    def remove(userId: Id, event: EmknEvent): F[Unit]
 
-    def getByUserId(id: Id): F[List[EmknEvent]]
+    def getAll: F[List[(Id, List[EmknEvent])]]
+
+    def getById(id: Id): F[List[EmknEvent]]
 }

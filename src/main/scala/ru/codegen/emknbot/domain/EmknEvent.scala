@@ -11,6 +11,5 @@ object EventType {
 }
 
 trait EmknEvent {
-
-    val eventType: EventType
+    def eventType: EventType
 }

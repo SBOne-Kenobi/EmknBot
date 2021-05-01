@@ -8,10 +8,6 @@ import org.scalatest.matchers.should.Matchers
 
 class MainTest extends AnyFunSuite with Matchers {
 
-    test("important test") {
-        assert(0 != 1)
-    }
-
     test("empty MapUserRepository") {
         val repo = new MapUserRepository[cats.Id]
         assert(repo.getAll.isEmpty)
